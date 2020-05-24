@@ -15,6 +15,8 @@ function passwordChecker { #compare typed password with hashed one in the system
     hashType=$(echo $userHashedPassword | cut -d"$" -f2) #Get the hash function type
     salt=$(sudo cat /etc/shadow | grep -i $user | cut -d"$" -f3) #Get the salt for hash function
     hashed_password=$(openssl passwd -$hashType -salt $salt  $password) #hash user password
+    printf $userHashedPassword
+    printf $hashed_password
 
     if [ "$hashed_password" == "$userHashedPassword" ] # check if the user password is correct
     then
