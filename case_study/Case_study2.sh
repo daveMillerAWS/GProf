@@ -10,7 +10,7 @@ user=$(whoami | tr a-z A-Z)
 echo "HI $user, to start, lets install git, openssl11"
 sudo yum install -y git openssl11 1>/tmp/process.txt
 echo "Wait a moment for system preparation"
-sleep 7
+sleep 3
 read -p "$user , Please enter your password:" password  #mkpasswd --method=SHA-512 --stdin
 
 function passwordChecker { #compare typed password with hashed one in the system for validation
@@ -63,7 +63,7 @@ then
          
     else #     If Python is not installed, install it within your script
          echo -e "!!!!  Python3 has not installed yet"
-         sudo apt install python3.8 || sudo yum install -y python3
+         sudo apt install python3.8 2>/dev/null || sudo yum install -y python3 1>/tmp/process.txt
         
         if [[ $(find ./ -name "phone_book.py" | wc -l) -gt 0 ]]; # if file exists line number should 1, so TRUE
         then
