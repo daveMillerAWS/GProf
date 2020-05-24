@@ -45,7 +45,7 @@ then
     cat AccessLog.txt # print out AccessLog file
     fi
     
-    if [[ $(apt list --installed | grep python3) || $(yum list --installed | grep python3) ]];#     Later on, check if you have installed Python
+    if [[ $(apt list --installed | grep python3) || $(yum list installed | grep python3) ]];#     Later on, check if you have installed Python
     then
         echo -e ">>>>>>>>\t Python3 installed already\t <<<<<<<<<<<"
         printf ""
