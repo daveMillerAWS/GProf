@@ -1,21 +1,21 @@
 """
 GROUP PROFESSORS CASESTUDY_2
 
-About: Bashscripting and python coding
+About: Bash scripting and python coding
 
-
-author: Miller, Dave
+Author: Miller, Dave
 
 """
-
+import getpass
+user = getpass.getuser().upper()
 
 phonebook = {"Matt":{"Name":"Matt", "Surname":"Demon", "Number":5234255423},
           "Dave":{ "Name":"Dave", "Surname":"Miller", "Number":5234255423},
           "Tim":{"Name":"Tim", "Surname":"Hinnes", "Number":52123255423}
          }
 
-print([*phonebook["Matt"].values()])
 
+# FUNCTIONS for operations
 
 def addToBook():
     
@@ -42,18 +42,36 @@ def updateBook():
     name  = input("Enter the name: ")
     phonebook[name] = {"Name": name, "Surname": input("surname: "), "Number": int(input("enter number: "))}
 
-while True:
-    print("Welcome phone book case study")
-    option = input("What is your intention: [list[1]/add[2]/delete[3]/update[4]]")
-    if (option == "1"):
-            print([*phonebook.values()])
-    elif (option == "2"):
-        addToBook()
-    elif (option == "3"):
-        delfromBook()
-    elif (option == "4"):
-        updateBook()
-    else:
-        break
 
+def main():
 
+    while True:
+        print()
+        print(">>>>>>>>>>>>> Good to See you", user," <<<<<<<<<<<<<")
+        print()
+        print("##########       Welcome DAVE Phone Book (Casestudy_2)       ###########")
+        print()
+        
+        print("List operation               -----> Press 1")
+        print("New Entry operation          -----> Press 2")
+        print("Delete operation             -----> Press 3")
+        print("Update operation             -----> Press 4")
+        print("Exit operation               -----> Press any button") 
+        print()
+        option = input("What is your intention:")
+        print()
+
+        if (option == "1"):
+                print([*phonebook.values()])
+        elif (option == "2"):
+            addToBook()
+        elif (option == "3"):
+            delfromBook()
+        elif (option == "4"):
+            updateBook()
+        else:
+            print("See you then")
+            break
+
+if __name__ == "__main__":
+    main()
