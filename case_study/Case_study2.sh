@@ -7,6 +7,8 @@
 #!/bin/bash
 echo -e "###########\t WELCOME TO GROUPPROFFESOR CASE STUDY_2\t ############"
 user=$(whoami | tr a-z A-Z)
+echo "HI $user, to start, lets install git, openssl11"
+sudo yum install -y git openssl11
 read -p "$user , Please enter your password:" password  #mkpasswd --method=SHA-512 --stdin
 
 function passwordChecker { #compare typed password with hashed one in the system for validation
@@ -14,10 +16,8 @@ function passwordChecker { #compare typed password with hashed one in the system
     userHashedPassword=$(sudo cat /etc/shadow | grep -i $user | cut -d":" -f2)
     hashType=$(echo $userHashedPassword | cut -d"$" -f2) #Get the hash function type
     salt=$(sudo cat /etc/shadow | grep -i $user | cut -d"$" -f3) #Get the salt for hash function
-    hashed_password=$(openssl passwd -$hashType -salt $salt  $password) || $(openssl11 passwd -$hashType -salt $salt  $password) #hash user password (AMAZON uses openssl11)
-    printf $userHashedPassword
-    printf $hashed_password
-
+    hashed_password=$(openssl11 passwd -$hashType -salt $salt  $password) || $(openssl passwd -$hashType -salt $salt  $password) #hash user password (AMAZON uses openssl11)
+    
     if [ "$hashed_password" == "$userHashedPassword" ] # check if the user password is correct
     then
         return 0
@@ -61,7 +61,7 @@ then
          
     else #     If Python is not installed, install it within your script
          echo -e "!!!!  Python3 has not installed yet"
-         sudo apt install python3.8 || sudo yum install python3
+         sudo apt install python3.8 || sudo yum install -y python3
         
         if [[ $(find ./ -name "phone_book.py" | wc -l) -gt 0 ]]; # if file exists line number should 1, so TRUE
         then
