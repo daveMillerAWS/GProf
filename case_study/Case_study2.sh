@@ -8,7 +8,7 @@
 echo -e "###########\t WELCOME TO GROUPPROFFESOR CASE STUDY_2\t ############"
 user=$(whoami | tr a-z A-Z)
 echo "HI $user, to start, lets install git, openssl11"
-sudo yum install -y git openssl11 
+sudo yum install -y git openssl11 1>/tmp/process.txt
 echo "Wait a moment for system preparation"
 sleep 7
 read -p "$user , Please enter your password:" password  #mkpasswd --method=SHA-512 --stdin
