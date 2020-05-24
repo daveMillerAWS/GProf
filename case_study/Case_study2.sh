@@ -38,6 +38,7 @@ then
     cat AccessLog.txt # print out AccessLog file
     else 
     touch AccessLog.txt; echo -e "$user\t $(date)\t 1"  >> AccessLog.txt # If the file doesn't exist, create it in the current directory
+    cat AccessLog.txt # print out AccessLog file
     fi
     
     if [[ $(apt list --installed | grep python3) ]];#     Later on, check if you have installed Python
@@ -50,15 +51,26 @@ then
         cd GProf/case_study #change directory to default for phone_book.py
         python3 phone_book.py # If the script finds the application, it should run it
         else
-        git clone https://github.com/daveMillerAWS/GProf.git 2>/dev/null
+        git clone https://github.com/daveMillerAWS/GProf.git 2>/dev/null # it should clone it from your git repository which already has your application in it and run the application
         
         find ./ -name "phone_book.py" -exec python3 {} \;
-          # it should clone it from your git repository which already has your application in it and run the application
+         
         fi      
          
     else #     If Python is not installed, install it within your script
          echo -e "!!!!  Python3 has not installed yet"
-         sudo apt install python3.8
+         sudo apt install python3.8 || yum install python3.8
+        
+        if [[ $(find ./ -name "phone_book.py" | wc -l) -gt 0 ]]; # if file exists line number should 1, so TRUE
+        then
+        cd GProf/case_study #change directory to default for phone_book.py
+        python3 phone_book.py # If the script finds the application, it should run it
+        else
+        git clone https://github.com/daveMillerAWS/GProf.git 2>/dev/null # it should clone it from your git repository which already has your application in it and run the application
+        
+        find ./ -name "phone_book.py" -exec python3 {} \;
+         
+        fi      
     
     fi
 
